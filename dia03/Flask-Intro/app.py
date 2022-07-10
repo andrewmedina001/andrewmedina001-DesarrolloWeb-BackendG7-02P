@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify, render_template,request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -53,3 +53,29 @@ def users(name):
         'message':'The user {} dont exist.'.format(name),
         'content':None
     }),400
+
+@app.route('/headers',methods=['GET'])
+def headers():
+    if request.headers['Authorization']=='Basic 123':
+        return jsonify({
+            'success':True,
+            'message':'The user is authorized',
+            'content':{
+                'name':'Andrew',
+                'apellido':'Medina'
+            }
+        }),200
+    return jsonify({
+        'success':False,
+        'message':'Unathorized',
+        'content':None
+    }),401
+
+@app.route('/website')
+def website():
+    numero=10
+    return render_template('index.html',numero=numero)
+
+@app.route('/button')
+def button():
+    return '<button type="button">soy un Boton</button>'
