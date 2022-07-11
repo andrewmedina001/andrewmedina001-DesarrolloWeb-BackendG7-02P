@@ -61,7 +61,7 @@ def headers():
             'success':True,
             'message':'The user is authorized',
             'content':{
-                'name':'Andrew',
+                'name':'AndreW',
                 'apellido':'Medina'
             }
         }),200
